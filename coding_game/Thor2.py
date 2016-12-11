@@ -68,4 +68,4 @@ for i in range(0, 4):
             result = None
             break
 
-        print str(move_y) + str(move_x) # Даем команду куда сделать следующий шаг
+        print str(move_y) + str(move_x)  # Даем команду куда сделать следующий шаг
