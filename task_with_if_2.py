@@ -40,7 +40,7 @@ value_of_discount = [0.02, 0.05, 0.1]
 discount = dict(zip(family_size, value_of_discount))
 
 
-for i in range(1, quantity_of_families + 1):
+for i in range(1, quantity_of_families):
     print "=================== Famyly order № %i ====================" % (i)
     quantity_of_guests = random.randint(1, 3)
     number_of_meals = 3 * quantity_of_guests
@@ -79,6 +79,5 @@ for i in range(1, quantity_of_families + 1):
     print "Сумма заказа со скидкой  = " + str(total_summ)
     print
     print
-    i += 1
     total_order = []
     total_summ = 0
