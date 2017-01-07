@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import random
+from collections import Counter
 
 # Придумайте программу, в которой используется инструкция if c ветками
 # elif и else.
@@ -16,68 +17,65 @@ import random
 # Большая семья (5 и более человек) не платят чаевые и получают скидку
 # 10% от суммы заказа
 
-i = 0
-total_summ = 0.00
-total_order = []
-number_of_meals = 0
-quantity_of_guests = 0
-family_order = []
+# new_meal = []
 type_of_family = []
-
-divider = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
 
 tips = 0.1
 quantity_of_families = 3
+number_of_meals = random.randint(1, 50)
+
+divider_1 = " ".join("_" * 28)
+divider_2 = "=" * 19
 
 # Задаем меню ресторана, из которого можно выбрать блюда
-name_of_meals = ["Meal_1", "Meal_2", "Meal_3", "Meal_4", "Meal_5", "Meal_6"]
-prices_of_meals = [1.00, 2.00, 3.00, 4.00, 5.00, 6.00]
+name_of_meals = ['meal_{}'.format(i) for i in xrange(1, number_of_meals)]
+prices_of_meals = [random.random() * 100 for i in xrange(1, number_of_meals)]
 menu = dict(zip(name_of_meals, prices_of_meals))
 
 # Задаем условия акции для расчета скидки
-family_size = ["Small", "Medium", "Large"]
-value_of_discount = [0.02, 0.05, 0.1]
-discount = dict(zip(family_size, value_of_discount))
+list_of_types = ['Small', 'Medium', 'Large']
+size_of_discount = [0.02, 0.05, 0.1]
+discount = dict(zip(list_of_types, size_of_discount))
 
+for i in range(1, quantity_of_families + 1):
+    total_order = []
+    total_sum = 0.
+    quantity_of_guests = 0
 
-for i in range(1, quantity_of_families):
-    print "=================== Famyly order № %i ====================" % (i)
-    quantity_of_guests = random.randint(1, 3)
-    number_of_meals = 3 * quantity_of_guests
+    # Задаем количество гостей в семье
+    quantity_of_guests = random.randint(1, 10)
 
-    # Определяем набор блюд в счете
-    for k in range(0, number_of_meals):
-        total_order.append(random.choice(name_of_meals))
-        total_summ = total_summ + menu[total_order[k]]
+    # Задаем набор блюд в счете семьи
+    for k in range(0, 3 * quantity_of_guests):
+        new_meal = random.choice(name_of_meals)
+        total_order.append(new_meal)
+        total_sum = total_sum + menu[new_meal]
+        bill = Counter(total_order)
 
     # Оформляем счет
-    print "Number of person %i" % (quantity_of_guests)
-    print "Number of meals for family %i" % (number_of_meals)
-    print divider
-    print "Name of meal   Quantity    Price"
-    print divider
-    for k in name_of_meals:
-        bill = total_order.count(k)
-        if bill > 0:
-            print (str(k) + "         " + str(bill) +
-                  "           " + "%.2f" % (menu[k] * bill))
-    print divider
-    print "Сумма заказа без скидки  = " + str(total_summ)
+    print divider_2 + " Family order №{} ".format(i) + divider_2
+    print "Number of person {}".format(quantity_of_guests)
+    print "Number of meals for family {}".format(3 * quantity_of_guests)
+    print divider_1
+    print "{:16}{:12}{}".format('Name of meal', 'Quantity', 'Price')
+    print divider_1
+    for k, price in menu.iteritems():
+        if k > 0:
+            print "{:16}{:d}{:16.2f}".format(k, bill[k], menu[k] * bill[k])
+    print divider_1
+    print "Total sum without discount  = {:.2f}".format(total_sum)
 
-    # Применяем акционные условия
+    # Применяем условия акционного предложения
     if 2 < quantity_of_guests <= 4:
-        type_of_family = family_size[1]
-        total_summ = total_summ - total_summ * discount[type_of_family]
+        type_of_family = list_of_types[1]
+        total_sum = total_sum - total_sum * discount.get(type_of_family)
     elif quantity_of_guests > 4:
-        type_of_family = family_size[2]
-        total_summ = total_summ - total_summ * discount[type_of_family]
+        type_of_family = list_of_types[2]
+        total_sum = total_sum - total_sum * discount.get(type_of_family)
     else:
-        type_of_family = family_size[0]
-        total_summ = total_summ + total_summ * tips - total_summ * discount[type_of_family]
-    print ("Famyly type - %s, размер скидки - %i процентов" %
-          (type_of_family, discount[type_of_family] * 100))
-    print "Сумма заказа со скидкой  = " + str(total_summ)
-    print
-    print
-    total_order = []
-    total_summ = 0
+        type_of_family = list_of_types[0]
+        total_sum = total_sum + total_sum * tips - total_sum * \
+            discount.get(type_of_family)
+    print ("Famyly type - {}, discount value - {} percents".format
+           (type_of_family, discount[type_of_family] * 100))
+    print "Total sum with discount  = {:.2f}".format(total_sum)

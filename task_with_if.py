@@ -13,8 +13,7 @@ attempt = 0
 counter = 0
 x = 0
 
-while attempt < 10:
-    attempt += 1
+for i in xrange (1, 10):
     x = random.uniform(-1, 1)
     if x > 0:
         x = math.ceil(x)
@@ -23,4 +22,4 @@ while attempt < 10:
     else:
         x = math.floor(x)
     print x
-print "ИТОГИ: Из %i попыток %i чисел положительные" % (attempt, counter)
+print "ИТОГИ: Из %i попыток %i чисел положительные" % (i, counter)
