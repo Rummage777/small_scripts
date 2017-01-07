@@ -50,7 +50,7 @@ for i in range(1, quantity_of_families + 1):
         new_meal = random.choice(name_of_meals)
         total_order.append(new_meal)
         total_sum = total_sum + menu[new_meal]
-        bill = Counter(total_order)
+    bill = Counter(total_order)
 
     # Оформляем счет
     print divider_2 + " Family order №{} ".format(i) + divider_2
@@ -59,9 +59,8 @@ for i in range(1, quantity_of_families + 1):
     print divider_1
     print "{:16}{:12}{}".format('Name of meal', 'Quantity', 'Price')
     print divider_1
-    for k, price in menu.iteritems():
-        if k > 0:
-            print "{:16}{:d}{:16.2f}".format(k, bill[k], menu[k] * bill[k])
+    for k in bill:
+        print "{:16}{:d}{:16.2f}".format(k, bill[k], menu[k] * bill[k])
     print divider_1
     print "Total sum without discount  = {:.2f}".format(total_sum)
 
