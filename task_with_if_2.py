@@ -17,12 +17,9 @@ from collections import Counter
 # Большая семья (5 и более человек) не платят чаевые и получают скидку
 # 10% от суммы заказа
 
-# new_meal = []
-type_of_family = []
-
 tips = 0.1
 quantity_of_families = 3
-number_of_meals = random.randint(1, 50)
+number_of_meals = random.randint(1, 5)
 
 divider_1 = " ".join("_" * 28)
 divider_2 = "=" * 19
@@ -59,8 +56,8 @@ for i in range(1, quantity_of_families + 1):
     print divider_1
     print "{:16}{:12}{}".format('Name of meal', 'Quantity', 'Price')
     print divider_1
-    for k in bill:
-        print "{:16}{:d}{:16.2f}".format(k, bill[k], menu[k] * bill[k])
+    for k, count in bill.items():
+        print "{:7}{:10d}{:>16.2f}".format(k, count, menu[k] * count)
     print divider_1
     print "Total sum without discount  = {:.2f}".format(total_sum)
 
