@@ -12,6 +12,7 @@ divider = "-" * 45
 
 for i in xrange(1, 11):
     a = random.randint(0, 2)
+    a = float(a)
     b = random.randint(0, 1)
     c = random.randint(0, 1)
     print divider
@@ -33,7 +34,7 @@ for i in xrange(1, 11):
             x1 = (-b + discriminant ** 0.5) / (2 * a)
             x2 = (-b - discriminant ** 0.5) / (2 * a)
             print "Discriminant > 0"
-            print "Roots are: x1 = {:.2f}, x2 = {:.2f}".format(x1, x2) + "\n"
+            print "Roots are: x1 = {}, x2 = {}".format(x1, x2) + "\n"
         elif discriminant < 0:
             print "Discriminant < 0"
             print "Equation #{} has no roots".format(i) + "\n"
