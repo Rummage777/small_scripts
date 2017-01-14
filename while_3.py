@@ -15,7 +15,7 @@ while i < 21:
 i = -1
 while i >= -21:
     if i % 3 == 0:
-        print i
+        print i,
         i -= 1
     else:
         i -= 1
