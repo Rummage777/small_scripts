@@ -12,9 +12,9 @@ while i < 21:
     else:
         i += 1
 
-i = 0
+i = -1
 while i >= -21:
-    if i != 0 and i % 3 == 0:
+    if i % 3 == 0:
         print i
         i -= 1
     else:
