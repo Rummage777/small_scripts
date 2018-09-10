@@ -1,6 +1,7 @@
 #!usr/bin/python
 # -*- coding: utf-8 -*-
 
+
 # Перепишите предыдущую программу так, чтобы пользователю
 # предлагалось решать пример до тех пор, пока он не напишет
 # правильный ответ. (При решении задачи используйте цикл while.)
@@ -15,4 +16,4 @@ while answer != 346:
         answer = int(answer)
         if answer != 346:
             print "Answer is incorrect. Try again!"
-print "You are brilliant! Answer is correct!"
+print "You are brilliant! Answer is correct!" 
